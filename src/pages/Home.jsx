@@ -1,34 +1,83 @@
 import React from 'react';
 import "../styles/style.css";
 
-<>
+function Home() {
+    let tablinks = document.getElementsByClassName("tab-links");
+    let tabcontents = document.getElementsByClassName("tab-contents");
+
+    function Opentab(e,tabname) {
+        tablinks.forEach((tab) => {
+            tab.classList.remove("active-link");
+        });
+        
+        tabcontents.forEach((tab) => {
+            tab.classList.remove("active-tab");
+        });
+       
+        e.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+
+    }
+    console.log(tablinks);         
+
+    var sidemenu = document.getElementById("sidemenu");
+    function openMenu() {
+        sidemenu.style.right = "0";
+    }
+    function closeMenu() {
+        sidemenu.style.right = "-200px";
+    }
+function GoogleSheet (){
+       const scriptURL = 'https://script.google.com/macros/s/AKfycbzVRN_z9I7-XjQWgBS2GtI-9fC73NPWR1RyF_q2v9YkxHhAW8qwBic4iF6BE6Rn0Ffl/exec'
+    const form = document.forms['submit-to-google-sheet']
+
+    const msg = document.getElementById('msg')
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => {
+                msg.innerHTML = "Message envoyé avec succès !"
+                setTimeout(function () {
+                    msg.innerHTML = ""
+                }, 5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+    }) 
+}
+
+
+  return (
+
+<div className='Home'>
     <div id="header">
         <div class="container">
             <nav>
-                <img src="images/logo png mehdi red.png" class="logo">
+                <img src="images/logo png mehdi red.png" class="logo"/>
                 <ul id="sidemenu">
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <i class="fa-solid fa-xmark" onclick="closeMenu()"></i>
+                    <i class="fa-solid fa-xmark" onClick={closeMenu}></i>
                 </ul>
-                <i class="fa-solid fa-bars" onclick="openMenu()"></i>
+                <i class="fa-solid fa-bars" onClick={openMenu}></i>
             </nav>
             <div class="header-text">
                 <p>Développeur Web Et Web Mobile</p>
-                <h1>Salut, Je M'appel <span>Mehdi</span> <br>AKAMI j'habite à Paris</h1>
+                <h1>Salut, Je M'appel <span>Mehdi</span> <br/>AKAMI j'habite à Paris</h1>
             </div>
         </div>
 
     </div>
-    <!-- ---------------about------------ -->
+    {/* <!-- ---------------about------------ --> */}
     <div id="about">
         <div class="container">
             <div class="row">
                 <div class="about-col-1">
-                    <img src="images/logo web dev.png">
+                    <img src="images/logo web dev.png"/>
                 </div>
                 <div class="about-col-2">
                     <h1 class="sub-title">À propos de moi</h1>
@@ -36,37 +85,37 @@ import "../styles/style.css";
                         maxime placeat doloribus temporibus itaque. Nulla aliquid a repellat voluptates labore tenetur,
                         quibusdam officia modi laborum? Animi.</p>
                     <div class="tab-titles">
-                        <p class="tab-links active-link" onclick="opentab('compétences')">Compétences</p>
-                        <p class="tab-links" onclick="opentab('expériences')">Expériences</p>
-                        <p class="tab-links" onclick="opentab('formations')">Formations</p>
+                        <p class="tab-links active-link" onclick={Opentab('compétences')}>Compétences</p>
+                        <p class="tab-links" onclick={Opentab('expériences')}>Expériences</p>
+                        <p class="tab-links" onclick={Opentab('formations')}>Formations</p>
                     </div>
                     <div class="tab-contents active-tab" id="compétences">
                         <ul>
-                            <li><span>UI/UX</span><br>Design Web/ App interface</li>
-                            <li><span>Front-End</span><br>Css Js React</li>
-                            <li><span>Back-End</span><br>Node.js Php</li>
+                            <li><span>UI/UX</span><br/>Design Web/ App interface</li>
+                            <li><span>Front-End</span><br/>Css Js React</li>
+                            <li><span>Back-End</span><br/>Node.js Php</li>
 
                         </ul>
                     </div>
                     <div class="tab-contents" id="expériences">
                         <ul>
-                            <li><span>2020 - 2023</span><br>Technicien supérieur itinérant de Distributeurs Automatiques
+                            <li><span>2020 - 2023</span><br/>Technicien supérieur itinérant de Distributeurs Automatiques
                                 (boisson chaud et friandise)MENDS - LONGJUMEAU</li>
 
-                            <li><span>2017 - 2020</span><br>Technicien itinérant de Distributeurs
+                            <li><span>2017 - 2020</span><br/>Technicien itinérant de Distributeurs
                                 Automatiques (boisson chaud et friandise) NEOCORNER - Asnières-sur-Seine</li>
-                            <li><span>2014</span><br>Technicien atelier de Distributeurs
+                            <li><span>2014</span><br/>Technicien atelier de Distributeurs
                                 Automatiques (boisson chaud et friandise) EUROVENDING - Rabat</li>
 
                         </ul>
                     </div>
                     <div class="tab-contents" id="formations">
                         <ul>
-                            <li><span>2023 - Présent</span><br>Master en Génie Logiciel et
+                            <li><span>2023 - Présent</span><br/>Master en Génie Logiciel et
                                 Multimédia</li>
-                            <li><span>2023 - Présent</span><br>Titre Professionnel N 5 RNCP
+                            <li><span>2023 - Présent</span><br/>Titre Professionnel N 5 RNCP
                                 en Développement Web Et Web Mobile </li>
-                            <li><span>2017</span><br>Licence professionnelle en Electrohydraulique Université de LONGWY
+                            <li><span>2017</span><br/>Licence professionnelle en Electrohydraulique Université de LONGWY
                                 – LORRAINE</li>
 
                         </ul>
@@ -78,7 +127,7 @@ import "../styles/style.css";
             </div>
         </div>
     </div>
-    <!-----------------services---------------------->
+    {/* <!-----------------services----------------------> */}
 
     <div id="services">
         <div class="container">
@@ -111,13 +160,13 @@ import "../styles/style.css";
             </div>
         </div>
 
-        <!-- -----------Portfolio-------------- -->
+        {/* <!-- -----------Portfolio-------------- --> */}
         <div id="portfolio">
             <div class="container">
                 <h1 class="sub-title">Mon Travail</h1>
                 <div class="work-list">
                     <div class="work">
-                        <img src="images/logo web dev.png">
+                        <img src="images/logo web dev.png"/>
                         <div class="layer">
                             <h3>Social Media App</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi repudiandae totam ab
@@ -128,7 +177,7 @@ import "../styles/style.css";
 
                     </div>
                     <div class="work">
-                        <img src="images/logo web dev.png">
+                        <img src="images/logo web dev.png"/>
                         <div class="layer">
                             <h3>Site interactif</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi repudiandae totam ab
@@ -139,7 +188,7 @@ import "../styles/style.css";
 
                     </div>
                     <div class="work">
-                        <img src="images/logo web dev.png">
+                        <img src="images/logo web dev.png"/>
                         <div class="layer">
                             <h3>Online Shoping App</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi repudiandae totam ab
@@ -150,7 +199,7 @@ import "../styles/style.css";
 
                     </div>
                     <div class="work">
-                        <img src="images/logo web dev.png">
+                        <img src="images/logo web dev.png"/>
                         <div class="layer">
                             <h3>Music App</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi repudiandae totam ab
@@ -164,7 +213,7 @@ import "../styles/style.css";
                 <a href="#" class="btn"> Voir Plus</a>
             </div>
         </div>
-        <!-- <-----------------------contact----------------->
+        {/* <!-- <-----------------------contact-----------------> */}
         <div id="contact">
             <div class="container">
                 <div class="row">
@@ -175,26 +224,28 @@ import "../styles/style.css";
                         <div class="social-icons">
                             <a href="https://www.linkedin.com/in/mehdi-akami-1912a51a9"><i
                                     class="fa-brands fa-linkedin"></i></a>
-                            <a href="https://github.com/akamidev/123"><i class="fa-brands fa-github"></i></i></a>
+                            <a href="https://github.com/akamidev/123">< i class="fa-brands fa-github"></i></a>
                             <a href="https://twitter.com/home"><i class="fa-brands fa-twitter"></i></a>
                             <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
                             <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
                         </div>
                         <a href="images/CV-Mehdi-AKAMI-.pdf" class="btn btn2">Téléchargez Mon CV</a>
                     </div>
-                    <div class="contact-right">
-                        <form name="submit-to-google-sheet">
-                            <input name="name" type="text" placeholder="Votre Nom" required>
-                            <input name="email" type="email" placeholder="Votre E-mail" required>
-                            <textarea name="message" placeholder="Votre Message" rows="6" required></textarea>
-                            <button type="submit" class="btn btn2">Submit</button>
+                            <div class="contact-right">
+                                <form className="submit-to-google-sheet">
+                                    <input className="name" type="text" placeholder="Votre Nom" required></input>
+                                    <input className="email" type="email" placeholder="Votre E-mail" required></input>
+                                    <textarea className="message" placeholder="Votre Message" rows="6" required></textarea>
+                                    <button type="submit" class="btn btn2">Submit</button>
 
-                        </form>
-                        <span id="msg"></span>
+                                </form>
+                                <span id="msg"></span>
+                            </div>
+
+                        </div>
+
                     </div>
-
                 </div>
-
             </div>
             <footer>
                 <div class="Copyright">
@@ -210,52 +261,10 @@ import "../styles/style.css";
 
             </footer>
 
-            <script>
+            
+</div>
 
-                var tablinks = document.getElementsByClassName("tab-links");
-                var tabcontents = document.getElementsByClassName("tab-contents");
+    );
+    }
 
-                function opentab(tabname) {
-                    for (tablink of tablinks) {
-                        tablink.classList.remove("active-link");
-                    }
-                    for (tabcontent of tabcontents) {
-                        tabcontent.classList.remove("active-tab");
-                    }
-                    event.currentTarget.classList.add("active-link");
-                    document.getElementById(tabname).classList.add("active-tab");
-
-                }
-                console.log(tablinks);         
-            </script>
-            <script>
-                var sidemenu = document.getElementById("sidemenu");
-                function openMenu() {
-                    sidemenu.style.right = "0";
-                }
-                function closeMenu() {
-                    sidemenu.style.right = "-200px";
-                }
-            </script>
-
-            <script>
-                const scriptURL = 'https://script.google.com/macros/s/AKfycbzVRN_z9I7-XjQWgBS2GtI-9fC73NPWR1RyF_q2v9YkxHhAW8qwBic4iF6BE6Rn0Ffl/exec'
-                const form = document.forms['submit-to-google-sheet']
-
-                const msg = document.getElementById('msg')
-
-                form.addEventListener('submit', e => {
-                    e.preventDefault()
-                    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                        .then(response => {
-                            msg.innerHTML = "Message envoyé avec succès !"
-                            setTimeout(function () {
-                                msg.innerHTML = ""
-                            }, 5000)
-                            form.reset()
-                        })
-                        .catch(error => console.error('Error!', error.message))
-                })
-
-            </script>
-</>
+    export default Home;
